@@ -3,35 +3,37 @@
 ## ask for the invert, it will not compute it, rather it will get
 ## it from the cache.
 
-## The function with which you can make a Vector object
-## what can cache its invert.
+## The function with which you can make a Matrix object
+## what can cache its own invert.
 
-makeCacheMatrix <- function(x = matrix()) {
+makeCacheMatrix <- function(myMatrix = matrix()) {
 	cachedVal <- NULL
-	set <- function(y=numeric()) {
-		x <<- y
+	set <- function(newMatrix=matrix()) {
+		myMatrix  <<- newMatrix
 		cachedVal <<- NULL
 	}
-	get <- function() x
+	get <- function() {
+		myMatrix
+	}
 	setInvert <- function(invert) cachedVal <<- invert
 	getInvert <- function() cachedVal
 	list(set = set, get = get,
-		setInvert = setInvert ,
-		getInvert = getInvert )
+		setInvert = setInvert,
+		getInvert = getInvert)
 }
 
 
 ## Generates the invert of the matrix, and store it in the cache,
-## or it gives back the value from cache if it is generated.
+## or it gives back the value from cache if it's already generated.
 
-cacheSolve <- function(x, ...) {
-        cachedVal <- x$getInvert()
+cacheSolve <- function(myMatrix, ...) {
+        cachedVal <- myMatrix$getInvert()
         if(!is.null(cachedVal)) {
                 message("getting cached data")
                 return(cachedVal)
         }
-        data <- x$get()
+        data <- myMatrix$get()
         cachedVal  <- solve(data, ...)
-        x$setInvert(cachedVal)
+        myMatrix$setInvert(cachedVal)
         cachedVal
 }
