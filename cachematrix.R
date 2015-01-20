@@ -15,8 +15,12 @@ makeCacheMatrix <- function(myMatrix = matrix()) {
 	get <- function() {
 		myMatrix
 	}
-	setInvert <- function(invert) cachedVal <<- invert
-	getInvert <- function() cachedVal
+	setInvert <- function(invert) {
+		cachedVal <<- invert
+	}
+	getInvert <- function() {
+		cachedVal
+	}
 	list(set = set, get = get,
 		setInvert = setInvert,
 		getInvert = getInvert)
