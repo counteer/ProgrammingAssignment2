@@ -9,9 +9,12 @@ makeCacheMatrix <- function(x = matrix()) {
 		x <<- y
 		cachedVal <<- NULL
 	}
-	get <- function() {
-		x
-	}
+	get <- function() x
+	setInvert <- function(mean) m <<- mean
+	getInvert <- function() cachedVal
+	list(set = set, get = get,
+		setInvert = setInvert ,
+		getInvert = getInvert )
 }
 
 
